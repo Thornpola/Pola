@@ -199,6 +199,8 @@
             font-weight: 700;
             transition: 0.3s;
             box-shadow: 0 5px 15px rgba(255,193,7,0.3);
+            cursor: pointer;
+            border: none;
         }
         .cta-button:hover {
             transform: scale(1.05);
@@ -206,7 +208,7 @@
             box-shadow: 0 10px 25px rgba(255,193,7,0.5);
         }
 
-        /* COVERFLOW SECTION - manual only (no auto) */
+        /* COVERFLOW SECTION */
         .portfolio-section {
             padding: 5rem 1rem;
             background: #0a0c12;
@@ -267,7 +269,6 @@
             font-size: 0.85rem;
             color: #bfc9e0;
             line-height: 1.4;
-            margin-bottom: 0.75rem;
         }
         .coverflow-controls {
             display: flex;
@@ -406,10 +407,120 @@
             text-align: center;
             min-width: 200px;
             transition: 0.2s;
+            cursor: pointer;
         }
         .contact-item:hover { background: #ffc10720; transform: scale(1.02); }
         .contact-icon svg { width: 35px; fill: #ffc107; }
         .contact-label { font-weight: 600; margin: 0.5rem 0; }
+
+        /* Contact Form Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #11141f;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #ffc107;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ffc107;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #f0f0f0;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1a1f2e;
+            border: 1px solid #282e3c;
+            border-radius: 8px;
+            color: #f0f0f0;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffc107;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-btn {
+            width: 100%;
+            background: #ffc107;
+            color: #0a0c12;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .form-btn:hover {
+            background: #ffd966;
+            transform: scale(1.02);
+        }
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        .form-message.success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            display: block;
+        }
+        .form-message.error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            display: block;
+        }
+
         footer {
             background: #05070c;
             padding: 2rem;
@@ -435,15 +546,6 @@
         @media (max-width: 680px) {
             .coverflow-item { flex: 0 0 240px; }
             .portfolio-image { height: 280px; }
-        }
-        /* download button inside overlay small adjust */
-        .portfolio-overlay .cta-button {
-            display: inline-block;
-            font-size: 0.8rem;
-            padding: 0.4rem 1rem;
-            margin-top: 0.75rem;
-            background: #ffc107;
-            color: #0a0c12;
         }
     </style>
 </head>
@@ -483,74 +585,19 @@
     </div>
 </section>
 
-<!-- Portfolio / Book Library (Coverflow - Manual Only, No Auto) -->
+<!-- Portfolio / Book Library (Coverflow) -->
 <section class="portfolio-section" id="portfolio">
     <div class="section-header reveal">
-        <h2 class="section-title">Expermental Methodology</h2>
+        <h2 class="section-title">Expermental Methodloggy</h2>
         <p class="section-subtitle">សូមជ្រើសរើសសៀវភៅដែលអ្នកចង់អាន</p>
     </div>
     <div class="coverflow-wrapper">
         <div class="coverflow-container" id="coverflowContainer">
-            <!-- Item 0: SPSS -->
-            <div class="coverflow-item" data-index="0">
-                <img src="./public/images/Jpg.jpg" alt="SPSS Guide" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=SPSS'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការណែនាំអំពីកម្មវិធី SPSS</h3>
-                    <p class="portfolio-description">SPSS គឺជាសំណុំ ប្រើដើម្បីវិភាគទិន្នន័យប្រកបដោយប្រសិទ្ធភាព និងគ្រប់គ្រងទិន្នន័យជាប្រព័ន្ធ។</p>
-                    <a href="/ការណែនាំអំពីកម្មវិធី_SPSS.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="1">
-                <img src="./public/images/2.jpg." alt="RCBD Model" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=RCBD'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">គំរូប្លង់ RCBD</h3>
-                    <p class="portfolio-description">ការវិភាគទិន្នន័យតាមកម្មវិធីSPSSគំរូប្លង់ RCBD</p>
-                    <a href="/RCBD.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="2">
-                <img src="./public/images/3.jpg" alt="Experimental Design" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=Design'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការរៀបចំផែនការពិសោធន៍</h3>
-                    <p class="portfolio-description">ការរៀបចំផែការសាកល្បងដោយចៃដន្យនៅក្នុងប្លុងពេញលេញ</p>
-                    <a href="/RCB.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="3">
-                <img src="./public/images/11.png" alt="Factor Analysis" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=SPSS+Analysis'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការវិភាគកត្តានៃលទ្ធផលពិសោធន៍ដោយប្រើកម្មវិធី SPSS</h3>
-                    <p class="portfolio-description">ការវិភាគកត្តា និងលទ្ធផលពិសោធន៍កម្រិតខ្ពស់</p>
-                    <a href="/SPSS T samley.1.pdf.crdownload.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="4">
-                <img src="./public/images/22.png" alt="Factorial Design" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=Factorial'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការរៀបចំបច្ច័យពិសោធន៍ដែលមាន 3Factor, 2level​ក្នុងCRD</h3>
-                    <p class="portfolio-description">ស្វែងយល់ពីការរចនា Factorial ក្នុង CRD</p>
-                    <a href="./public/pdfs/04. Factorial (3 ปัจจัย).pptx ១.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="5">
-                <img src="./public/images/33.png" alt="CRD" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=CRD'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការរៀបចំផែនការដោយចៃដន្យ</h3>
-                    <p class="portfolio-description">Completely Randomized Design (CRD) មូលដ្ឋានគ្រឹះ</p>
-                    <a href="./public/pdfs/SPSS T samley.1.pdf.crdownload.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
-            <div class="coverflow-item" data-index="6">
-                <img src="./public/images/44.png" alt="Factorial Management" class="portfolio-image" onerror="this.src='https://placehold.co/600x400/1e2432/ffc107?text=Factorial+Control'">
-                <div class="portfolio-overlay">
-                    <h3 class="portfolio-title">ការគ្រប់គ្រងការពិសោធន៏ Factorial</h3>
-                    <p class="portfolio-description">វិធីសាស្រ្តគ្រប់គ្រងកត្តាច្រើនក្នុងការពិសោធន៍</p>
-                    <a href="./public/pdfs/factorial.pdf" class="cta-button">ទាញយក</a>
-                </div>
-            </div>
+            <!-- Items will be loaded dynamically -->
         </div>
         <div class="coverflow-controls">
             <button class="control-btn" id="prevBtn">‹</button>
+            <button class="control-btn" id="playPauseBtn">▶</button>
             <button class="control-btn" id="nextBtn">›</button>
         </div>
         <div class="indicators" id="indicators"></div>
@@ -560,26 +607,48 @@
 <!-- About -->
 <section class="about-section" id="about">
     <div class="about-container reveal">
-        <div class="about-image"><img src="./public/images/photo_2026-01-26_12-43-09.jpg" alt="Photographer" onerror="this.src='https://placehold.co/800x600/1e2432/ffc107?text=Mam+Samley'"></div>
-        <div class="about-content">
-            <h2>Mam Samley</h2>
-            <p>អ្នកឯកទេសខាងវិធីសាស្ត្រស្រាវជ្រាវ និងការវិភាគទិន្នន័យ។ លោកគ្រូមានបទពិសោធន៍ជក្នុងការបង្រៀន និងណែនាំនិស្សិតឱ្យយល់ដឹងពីការរចនាពិសោធន៍ និងកម្មវិធី SPSS។</p>
-            <div class="stats">
-                
-            </div>
-        </div>
+        <div class="about-image"><img src="/images/photo_2026-01-26_12-43-09.jpg" alt="Photographer"></div>
+        <div class="about-content"><h2>Mam Samley</h2></div>
     </div>
 </section>
 
 <!-- Contact -->
 <section class="contact-section" id="contact">
-    <div class="section-header reveal"><h2 class="section-title">រៀបរៀងដោយ : ថន ប៉ូឡា</h2><p class="section-subtitle">ទំនាក់ទំនងសម្រាប់ព័ត៌មានបន្ថែម</p></div>
-    <div class="contact-info reveal">
-        <a href="mailto:thornpola6@gmail.com" class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg></div><div class="contact-label">Email</div><div class="contact-value">thornpola6@gmail.com</div></a>
-        <a href="tel:+855884554566" class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/></svg></div><div class="contact-label">Phone</div><div class="contact-value">088 455 4566</div></a>
-        <a href="#" class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5S14.5 7.62 14.5 9S13.38 11.5 12 11.5Z"/></svg></div><div class="contact-label">Studio</div><div class="contact-value">Kampong Speu Institute of Technology</div></a>
+    <div class="section-header reveal"><h2 class="section-title">រៀបរៀងដោយ : ថន ប៉ូឡា</h2><p class="section-subtitle">Let's create something beautiful together</p></div>
+    <div class="contact-info reveal" id="contactInfo">
+        <!-- Contact items will be loaded dynamically -->
     </div>
 </section>
+
+<!-- Contact Modal -->
+<div class="modal" id="contactModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Send Message</h2>
+            <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="form-btn">Send Message</button>
+            <div class="form-message" id="formMessage"></div>
+        </form>
+    </div>
+</div>
 
 <footer>
     <div class="social-links">
@@ -590,12 +659,304 @@
     <p class="footer-text">© 2026 Pola Entertainment Photography. All rights reserved.<br>Thorn Pola</p>
 </footer>
 
+<script src="/config.js"></script>
 <script>
     (function() {
+        let portfolioData = [];
+        let contactData = {};
+
+        // Initialize configuration
+        async function initializeApp() {
+            try {
+                // Wait for config to be loaded
+                await new Promise(resolve => {
+                    const checkConfig = () => {
+                        if (AppConfig && AppConfig.getAll) {
+                            resolve();
+                        } else {
+                            setTimeout(checkConfig, 100);
+                        }
+                    };
+                    checkConfig();
+                });
+
+                // Load portfolio and contact data
+                await loadPortfolioData();
+                setupCoverflow();
+                setupContactModal();
+            } catch (error) {
+                console.error('Initialization error:', error);
+            }
+        }
+
+        // Load portfolio data from API
+        async function loadPortfolioData() {
+            try {
+                const response = await fetch('/api/portfolio');
+                const result = await response.json();
+                portfolioData = result.data;
+                renderPortfolio();
+            } catch (error) {
+                console.warn('Using default portfolio data');
+                portfolioData = [
+                    {
+                        id: 0,
+                        title: 'ការណែនាំអំពីកម្មវិធី SPSS',
+                        description: 'SPSS គឺជាសំណុំ ប្រើដើម្បីវិភាគទិន្នន័យប្រកបដោយប្រសិទ្ធភាព',
+                        image: '/images/Jpg.jpg',
+                        pdf: '/pdfs/ការណែនាំអំពីកម្មវិធី_SPSS.pdf'
+                    },
+                    {
+                        id: 1,
+                        title: 'គំរូប្លង់ RCBD',
+                        description: 'ការវិភាគទិន្នន័យតាមកម្មវិធីSPSSគំរូប្លង់ RCBD',
+                        image: '/images/2.jpg',
+                        pdf: '/pdfs/RCBD.pdf'
+                    },
+                    {
+                        id: 2,
+                        title: 'ការរៀបចំផែនការពិសោធន៍',
+                        description: 'ការរៀបចំផែការសាកល្បងដោយចៃដន្យនៅក្នុងប្លុងពេញលេញ',
+                        image: '/images/3.jpg',
+                        pdf: '/pdfs/RCB.pdf'
+                    }
+                ];
+                renderPortfolio();
+            }
+        }
+
+        // Render portfolio items
+        function renderPortfolio() {
+            const container = document.getElementById('coverflowContainer');
+            container.innerHTML = '';
+            
+            portfolioData.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'coverflow-item';
+                div.setAttribute('data-index', idx);
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">${item.title}</h3>
+                        <p class="portfolio-description">${item.description}</p>
+                        <a href="${item.pdf}" class="cta-button" style="margin-top: 1rem; font-size: 0.9rem;">ទាញយក</a>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Setup contact modal
+        function setupContactModal() {
+            const modal = document.getElementById('contactModal');
+            const closeBtn = document.getElementById('closeModal');
+            const form = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+
+            // Load contact items
+            const contactInfo = document.getElementById('contactInfo');
+            contactInfo.innerHTML = `
+                <a href="javascript:void(0)" class="contact-item" onclick="document.getElementById('contactModal').classList.add('active')">
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg></div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">thornpola6@gmail.com</div>
+                </a>
+                <a href="tel:+85588455456" class="contact-item">
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/></svg></div>
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">088 455 4566</div>
+                </a>
+                <a href="#" class="contact-item">
+                    <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5S14.5 7.62 14.5 9S13.38 11.5 12 11.5Z"/></svg></div>
+                    <div class="contact-label">Studio</div>
+                    <div class="contact-value">Kampong Speu Institute of Technology</div>
+                </a>
+            `;
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+
+                try {
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        formMessage.textContent = '✅ ' + result.message;
+                        formMessage.classList.remove('error');
+                        formMessage.classList.add('success');
+                        form.reset();
+                        setTimeout(() => modal.classList.remove('active'), 2000);
+                    } else {
+                        formMessage.textContent = '❌ ' + result.message;
+                        formMessage.classList.remove('success');
+                        formMessage.classList.add('error');
+                    }
+                } catch (error) {
+                    formMessage.textContent = '❌ Error sending message';
+                    formMessage.classList.remove('success');
+                    formMessage.classList.add('error');
+                }
+            });
+        }
+
+        // COVERFLOW LOGIC
+        const container = document.getElementById('coverflowContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+
+        let activeIndex = 0;
+        let autoInterval = null;
+        let isPlaying = true;
+
+        function buildIndicators() {
+            indicatorsContainer.innerHTML = '';
+            const items = document.querySelectorAll('.coverflow-item');
+            items.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.classList.add('indicator');
+                if (idx === activeIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    setActiveIndex(idx, true);
+                    resetAutoPlay();
+                });
+                indicatorsContainer.appendChild(dot);
+            });
+        }
+
+        function updateIndicators() {
+            const dots = document.querySelectorAll('.indicator');
+            dots.forEach((dot, i) => {
+                if (i === activeIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        function centerActiveItem(instant = false) {
+            const items = document.querySelectorAll('.coverflow-item');
+            if (!container || items.length === 0) return;
+            const activeItem = items[activeIndex];
+            if (!activeItem) return;
+            const wrapperRect = container.parentElement.getBoundingClientRect();
+            const itemRect = activeItem.getBoundingClientRect();
+            const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+            const itemCenter = itemRect.left + itemRect.width / 2;
+            let offset = wrapperCenter - itemCenter;
+            const currentTransform = getComputedTransformX(container);
+            const newTranslate = currentTransform + offset;
+            const maxTranslate = 0;
+            const containerWidth = container.scrollWidth;
+            const wrapperWidth = wrapperRect.width;
+            const minTranslate = wrapperWidth - containerWidth;
+            const clamped = Math.min(maxTranslate, Math.max(minTranslate, newTranslate));
+            container.style.transition = instant ? 'none' : 'transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            container.style.transform = `translateX(${clamped}px)`;
+        }
+
+        function getComputedTransformX(el) {
+            const style = window.getComputedStyle(el);
+            const transform = style.transform;
+            if (transform === 'none') return 0;
+            const matrix = transform.match(/matrix.*\((.+)\)/);
+            if (matrix) {
+                const values = matrix[1].split(', ');
+                return parseFloat(values[4]) || 0;
+            }
+            return 0;
+        }
+
+        function updateActiveStyles() {
+            const items = document.querySelectorAll('.coverflow-item');
+            items.forEach((item, idx) => {
+                if (idx === activeIndex) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+            updateIndicators();
+        }
+
+        function setActiveIndex(newIndex, smoothCenter = true) {
+            const items = document.querySelectorAll('.coverflow-item');
+            if (newIndex < 0) newIndex = items.length - 1;
+            if (newIndex >= items.length) newIndex = 0;
+            activeIndex = newIndex;
+            updateActiveStyles();
+            centerActiveItem(!smoothCenter);
+        }
+
+        function nextSlide() { setActiveIndex(activeIndex + 1, true); }
+        function prevSlide() { setActiveIndex(activeIndex - 1, true); }
+
+        function startAutoPlay() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                if (isPlaying) nextSlide();
+            }, 4000);
+        }
+
+        function stopAutoPlay() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = null;
+        }
+
+        function resetAutoPlay() {
+            if (isPlaying) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        }
+
+        function toggleAutoPlay() {
+            if (isPlaying) {
+                stopAutoPlay();
+                isPlaying = false;
+                playPauseBtn.textContent = '▶';
+            } else {
+                isPlaying = true;
+                startAutoPlay();
+                playPauseBtn.textContent = '⏸';
+            }
+        }
+
+        function setupCoverflow() {
+            prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+            nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+            playPauseBtn.addEventListener('click', toggleAutoPlay);
+            window.addEventListener('resize', () => { centerActiveItem(true); });
+
+            buildIndicators();
+            updateActiveStyles();
+            setTimeout(() => {
+                centerActiveItem(true);
+                startAutoPlay();
+            }, 100);
+
+            window.addEventListener('load', () => { centerActiveItem(true); });
+        }
+
         // Loading screen
         window.addEventListener('load', () => {
             const loader = document.getElementById('loadingScreen');
-            if(loader) {
+            if (loader) {
                 setTimeout(() => {
                     loader.style.opacity = '0';
                     setTimeout(() => loader.style.display = 'none', 600);
@@ -606,7 +967,7 @@
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
-        if(menuToggle) {
+        if (menuToggle) {
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
             });
@@ -617,147 +978,36 @@
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
-                if(targetId === "#" || targetId === "") return;
+                if (targetId === "#" || targetId === "") return;
                 const targetEl = document.querySelector(targetId);
-                if(targetEl) {
+                if (targetEl) {
                     e.preventDefault();
                     targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // ---------- MANUAL COVERFLOW (NO AUTOPLAY) ----------
-        const container = document.getElementById('coverflowContainer');
-        const items = Array.from(document.querySelectorAll('.coverflow-item'));
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const indicatorsContainer = document.getElementById('indicators');
-
-        let activeIndex = 0;
-
-        // Create indicators
-        function buildIndicators() {
-            indicatorsContainer.innerHTML = '';
-            items.forEach((_, idx) => {
-                const dot = document.createElement('div');
-                dot.classList.add('indicator');
-                if(idx === activeIndex) dot.classList.add('active');
-                dot.addEventListener('click', () => {
-                    setActiveIndex(idx, true);
-                });
-                indicatorsContainer.appendChild(dot);
-            });
-        }
-
-        function updateIndicators() {
-            const dots = document.querySelectorAll('.indicator');
-            dots.forEach((dot, i) => {
-                if(i === activeIndex) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
-        }
-
-        // Get current transform X
-        function getComputedTransformX(el) {
-            const style = window.getComputedStyle(el);
-            const transform = style.transform;
-            if(transform === 'none') return 0;
-            const matrix = transform.match(/matrix.*\((.+)\)/);
-            if(matrix) {
-                const values = matrix[1].split(', ');
-                return parseFloat(values[4]) || 0;
-            }
-            return 0;
-        }
-
-        // Center the active item in wrapper
-        function centerActiveItem(instant = false) {
-            if(!container || items.length === 0) return;
-            const activeItem = items[activeIndex];
-            if(!activeItem) return;
-            const wrapperRect = container.parentElement.getBoundingClientRect();
-            const itemRect = activeItem.getBoundingClientRect();
-            const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
-            const itemCenter = itemRect.left + itemRect.width / 2;
-            let offset = wrapperCenter - itemCenter;
-            const currentTransform = getComputedTransformX(container);
-            const newTranslate = currentTransform + offset;
-            const containerWidth = container.scrollWidth;
-            const wrapperWidth = wrapperRect.width;
-            const minTranslate = wrapperWidth - containerWidth;
-            const maxTranslate = 0;
-            const clamped = Math.min(maxTranslate, Math.max(minTranslate, newTranslate));
-            container.style.transition = instant ? 'none' : 'transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-            container.style.transform = `translateX(${clamped}px)`;
-            if(instant) setTimeout(() => { container.style.transition = ''; }, 50);
-        }
-
-        function updateActiveStyles() {
-            items.forEach((item, idx) => {
-                if(idx === activeIndex) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            updateIndicators();
-        }
-
-        function setActiveIndex(newIndex, smoothCenter = true) {
-            if(newIndex < 0) newIndex = items.length - 1;
-            if(newIndex >= items.length) newIndex = 0;
-            activeIndex = newIndex;
-            updateActiveStyles();
-            centerActiveItem(!smoothCenter);
-        }
-
-        // manual navigation only
-        function nextSlide() { setActiveIndex(activeIndex + 1, true); }
-        function prevSlide() { setActiveIndex(activeIndex - 1, true); }
-
-        // Add click on each coverflow-item to select manually (user's own selection)
-        items.forEach((item, idx) => {
-            item.addEventListener('click', (e) => {
-                // Prevent conflict if user clicks directly on download link (should not override download)
-                if(e.target.closest('a')) return;  // if click on anchor link, allow download but still keep active? we just don't change index but fine
-                if(idx !== activeIndex) {
-                    setActiveIndex(idx, true);
-                }
-            });
-        });
-
-        prevBtn.addEventListener('click', () => { prevSlide(); });
-        nextBtn.addEventListener('click', () => { nextSlide(); });
-
-        window.addEventListener('resize', () => { centerActiveItem(true); });
-        
-        // init coverflow
-        buildIndicators();
-        updateActiveStyles();
-        setTimeout(() => {
-            centerActiveItem(true);
-        }, 120);
-        
-        window.addEventListener('load', () => { centerActiveItem(true); });
-
         // REVEAL ON SCROLL
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
         revealElements.forEach(el => observer.observe(el));
-        
-        // manual trigger for any visible reveal
+
+        // Manual trigger for hero reveal
         document.querySelectorAll('.reveal').forEach(el => {
-            if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
+            if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
         });
+
+        // Start the app
+        initializeApp();
     })();
 </script>
 </body>
